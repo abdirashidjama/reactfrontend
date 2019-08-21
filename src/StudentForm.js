@@ -76,7 +76,7 @@ class StudentForm extends Component{
 		)
 		return (
 			<div className="StudentForm">
-				<h1>add Students</h1>
+				<h1>Add Student</h1>
 				<form onSubmit={this.handleSubmit} style={styled}>
 					{
 						listItems
