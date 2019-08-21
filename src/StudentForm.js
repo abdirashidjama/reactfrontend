@@ -10,9 +10,27 @@ class StudentForm extends Component{
 			lastName: "",
 			email: "",
 			contactNumber: "",
-			memExpDate: "",
+			membershipExpiry: "",
 			hours: ""
 		}
+		this.handleChange= this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	handleChange(event){
+		const target = event.target;
+		const name = target.name;
+		const value = target.value; 
+		this.setState({
+			[name]: value
+		})
+	}
+	handleSubmit(event) {
+		var listState = "";
+		for(var el in this.state){
+			listState += this.state[el] + '\n';
+		}
+		alert('Form submitted for ' + '\n' + listState);
+		event.preventDefault();
 	}
 	render(){
 		const styled = {
@@ -21,11 +39,11 @@ class StudentForm extends Component{
 		}
 		const formData = [
 			{
-				name: "first name",
+				name: "first Name",
 				type: "text"
 			},
 			{
-				name: "last name",
+				name: "last Name",
 				type: "text"
 			},
 			{
@@ -33,33 +51,37 @@ class StudentForm extends Component{
 				type: "text"
 			},
 			{
-				name: "contact number",
+				name: "contact Number",
 				type: "text"
 			},
 			{
-				name: "membership expiry",
+				name: "membership Expiry",
 				type: "text"
 			},
 			{
 				name: "hours",
 				type: "number"
-			},
+			}
 			
 		]
 		const listItems = formData.map(data =>
 			<label>
 				{data.name}
-				<input type={data.type} name={data.name.replace(/\s/g,'')} />
+				<input type={data.type} 
+				value={this.state[data.name.replace(/\s/g,'')]} 
+				name={data.name.replace(/\s/g,'')}
+				onChange={this.handleChange} 
+				/>
 			</label>
 		)
 		return (
 			<div className="StudentForm">
-				<h1>add Student</h1>
-				<form style={styled}>
+				<h1>add Students</h1>
+				<form onSubmit={this.handleSubmit} style={styled}>
 					{
 						listItems
 					}
-					<button>submit</button>
+					<input type="submit" value="Submit" />
 				</form>
 			</div>
 		);
