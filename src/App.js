@@ -28,8 +28,6 @@ class App extends Component {
 				</h>
 				<StudentForm />
 				<ShowStudents students={this.state.students} />
-				{<p>{JSON.stringify(students)}</p>}
-				
 			</div>
 		);
 	}

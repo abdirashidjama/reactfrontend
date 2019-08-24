@@ -34,7 +34,11 @@ class StudentForm extends Component{
 		var url = 'http://localhost:3001/students/';
 		const data = {
 			firstname : this.state.firstName,
-			lastname : this.state.lastName
+			lastname : this.state.lastName,
+			email: this.state.email,
+			number: this.state.number,
+			memexpdate: this.state.membershipExpiry,
+			hours: this.state.hours
 		}
 		fetch(url, {
 			method: 'POST',

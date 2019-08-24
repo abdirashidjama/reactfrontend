@@ -1,26 +1,34 @@
 import React, {Component} from 'react'
+import ShowStudent from './ShowStudent';
 
-class showStudents extends Component{
+class ShowStudents extends Component{
 	constructor(props){
 		super(props);
 	}
 	render(){
+		var allStudents = [];	
+		for(const student of this.props.students){
+			for(var pro in student){
+				allStudents.push(<h5>{JSON.stringify(student[pro])}</h5>)
+			}
+
+	
+		}
 		const studentDiv = this.props.students.map(student =>
-			<div>
-			<h3>{student.firstname} </h3>
-			<h3>{student.lastname} </h3>
-			<img src={student.studentImage} />
-			</div>
-			
+				<ShowStudent student={student} />
+
 		);
+		
 		return(
-			<div>
-				<h1>students</h1>
-				{studentDiv}
-			</div>
+				<div>
+					<h1>All Students</h1>
+					<div style={{display: "flex"}}>
+						{studentDiv}
+					</div>
+				</div>
 		
 		);
 	}
 }
 
-export default showStudents;
+export default ShowStudents;
