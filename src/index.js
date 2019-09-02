@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import StudentForm from './StudentForm';
-import ShowStudents from './ShowStudents';
+import StudentForm from './components/StudentForm';
+import ShowStudents from './components/ShowStudents';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
+import { creatStore } from 'redux';
+//import lister from './reducers/lister'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
+//import rootReducer from './redux/reducers';
 
+//To Do: add reducer 
+/*const store = createStore(
+		null,
+		applyMiddleware(thunk)
+);*/
+const store = {};
 const routing =(
+	//<Provider store={store}>
 	<Router>
 		<div>
 			<Route exact path="/" component={App}/>
@@ -15,6 +28,7 @@ const routing =(
 			<Route path="/allStudents" component={ShowStudents}/>
 		</div>
 	</Router>
+	//</Provider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

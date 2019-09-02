@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import StudentForm from './StudentForm';
-import ShowStudents from './ShowStudents';
+import StudentForm from './components/StudentForm';
+import ShowStudents from './components/ShowStudents';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
+
 
 
 class App extends Component {
@@ -12,16 +14,8 @@ class App extends Component {
 			students: []
 		}
 	}
-	componentWillMount(){
-		fetch('http://localhost:3001/students/')
-		.then(res=> res.json())
-		.then((data) => {
-			this.setState({students: data.students})
-		})
-		.catch(console.log)
-	}
+
 	render(){
-		const students= this.state.students;
 		const form = <StudentForm />
 		const showStudents = <ShowStudents students= {this.state.students} />
 		return (
