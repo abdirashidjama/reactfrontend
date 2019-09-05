@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import   firebase from '../firebase-config';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import {Helmet} from 'react-helmet';
+
 
 class StudentForm extends Component{
 	constructor(props){
@@ -101,51 +105,66 @@ class StudentForm extends Component{
 		}
 		const formData = [
 			{
-				name: "first Name",
+				name: "First Name",
+				id: "first Name",
 				type: "text"
 			},
-			{
-				name: "last Name",
+			{	
+				name: "Last Name",
+				id: "last Name",
 				type: "text"
 			},
 			{
 				name: "email",
+				id: "email",
+				type: "text"
+			},
+			{	
+				name: "Contact Number",
+				id: "contact Number",
 				type: "text"
 			},
 			{
-				name: "contact Number",
+				name: "Membership Expiry",
+				id: "membership Expiry",
 				type: "text"
 			},
 			{
-				name: "membership Expiry",
-				type: "text"
-			},
-			{
-				name: "hours",
+				name: "Total Hours",
+				id: "hours",
 				type: "number"
 			}
 		]
 		const listItems = formData.map(data =>
-			<label>
+			<Form.Group className="mb-3">
 				{data.name}
-				<input type={data.type} 
-				value={this.state[data.name.replace(/\s/g,'')]} 
-				name={data.name.replace(/\s/g,'')}
+				<Form.Control 
+				value={this.state[data.id.replace(/\s/g,'')]} 
+				name={data.id.replace(/\s/g,'')}
 				onChange={this.handleChange} 
-				id={data.name}
+				id={data.id}
 				/>
-			</label>
+			</Form.Group>
 		)
 		return (
-			<div className="StudentForm">	
+			<div className="StudentForm">
+				<Helmet>
+						<meta charset="utf-8"/>
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+						<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+				</Helmet>	
 				<h1>Add Student</h1>
-				<form onSubmit={this.handleSubmit} style={styled}>
+				<Form onSubmit={this.handleSubmit} style={styled}>
 					{
 						listItems
 					}
 					<input type="file" ref={this.setRef} />
+					<br/>
 					<input type="submit" value="Submit" />
-				</form>
+				</Form>
 			</div>
 		);
 	}
