@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Table from 'react-bootstrap/Table'
+import Image from 'react-bootstrap/Image'
+import {Helmet} from 'react-helmet';
 
 class ShowStudent extends Component{
 	constructor(props){
@@ -13,14 +16,18 @@ class ShowStudent extends Component{
 				textAlign: "center",
 				padding: "2rem"
 		}
+		const imageStyle={
+			height: "100px" ,
+			width: "80px"
+		}
 		return(
-			<div style={divStyle}>
-				<ul style={{listStyleType: "none"}}>
-					<li> {this.props.student.firstname} {this.props.student.lastname}</li>
-					<img height="100vh" width="100vw" 
-					src="https://vignette.wikia.nocookie.net/deathbattlefanon/images/2/20/C0A9B238-91F6-46AA-ABDC-3FC720228C25.png/revision/latest?cb=20171104014554"/>
-				</ul>
-			</div>
+			<tr>
+				<td style={imageStyle}><Image src={this.props.student.studentImage} fluid/></td>
+				<td>{this.props.student.firstname}</td>
+				<td>{this.props.student.lastname}</td>
+				<td>{this.props.student.email}</td>
+			</tr>
+
 		
 		);
 	}

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import StudentForm from './components/StudentForm';
 import ShowStudents from './components/ShowStudents';

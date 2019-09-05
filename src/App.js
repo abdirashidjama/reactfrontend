@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import StudentForm from './components/StudentForm';
 import ShowStudents from './components/ShowStudents';
-import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
