@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import Table from 'react-bootstrap/Table'
-import Image from 'react-bootstrap/Image'
+import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image';
 import {Helmet} from 'react-helmet';
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 class ShowStudent extends Component{
 	constructor(props){
@@ -26,6 +28,12 @@ class ShowStudent extends Component{
 				<td>{this.props.student.firstname}</td>
 				<td>{this.props.student.lastname}</td>
 				<td>{this.props.student.email}</td>
+				<td>
+					<ButtonGroup vertical>
+						<Button variant="primary">Update</Button>
+						<Button variant ="danger">Delete</Button>
+					</ButtonGroup>
+				</td>
 			</tr>
 
 		

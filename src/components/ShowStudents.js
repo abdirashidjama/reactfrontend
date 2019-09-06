@@ -46,17 +46,20 @@ class ShowStudents extends Component{
 					<Table striped bordered hover variant="dark" size="sm">
 						<thead>
 							<tr>
-								<th sm={2}>
+								<th>
 									Image
 								</th>
-								<th sm={1}>
+								<th>
 									First Name
 								</th>
-								<th sm={1}>
+								<th>
 									Last Name
 								</th>
-								<th sm={1}>
+								<th>
 									email
+								</th>
+								<th>
+									action
 								</th>
 							</tr>
 						</thead>
