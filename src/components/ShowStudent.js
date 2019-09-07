@@ -8,23 +8,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 class ShowStudent extends Component{
 	constructor(props){
 		super(props)
-		//this.deleteStudent= this.deleteStudent.bind(this);
 	}
-	/*deleteStudent(){
-		var url = 'http://localhost:3001/students/'+this.props.student._id;
 
-		fetch(url, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-		.then(res => res.json())
-		.then(response=>console.log('Success:', JSON.stringify(response)))
-		.catch(error => console.error('Error:', error));
-		alert("user deleted");
-		return;
-	}*/
 	render(){
 		const divStyle = {
 				borderColor: "#eeeeee",
@@ -46,7 +31,7 @@ class ShowStudent extends Component{
 				<td>{this.props.student.email}</td>
 				<td>
 					<ButtonGroup vertical>
-						<Button variant="primary" >Update</Button>
+						{this.props.update}
 						{this.props.delete}
 		{/*<Button variant ="danger" >Delete</Button>*/}
 					</ButtonGroup>

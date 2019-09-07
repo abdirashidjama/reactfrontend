@@ -4,12 +4,21 @@ import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import {Helmet} from 'react-helmet';
 import Button from 'react-bootstrap/Button'
+import UpdateStudentForm from './UpdateStudentForm';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import Modal from 'react-bootstrap/Modal';
+
 
 class ShowStudents extends Component{
 	constructor(props){
 		super(props);
-		this.state={students:[]}
-		this.deleteStudent= this.deleteStudent.bind(this);
+		this.state={
+			students:[],
+			updateForm: false,
+			form:[]
+		}
+		this.deleteStudent = this.deleteStudent.bind(this);
+		this.updateStudent = this.updateStudent.bind(this)
 	}
 	deleteStudent(student){
 		//Removes from database
@@ -36,9 +45,14 @@ class ShowStudents extends Component{
 			students: newStudents
 		})
 
+		alert("Student deleted");
+	}
+	updateStudent(studentInfo){
+		this.setState({
+			form: <UpdateStudentForm student={studentInfo}></UpdateStudentForm>,
+			updateForm: true
+		});
 
-		alert("user deleted");
-		return;
 	}
 	componentWillMount(){
 		fetch('http://localhost:3001/students/')
@@ -63,7 +77,7 @@ class ShowStudents extends Component{
 				<ShowStudent 
 				student={student} 
 				delete={<Button variant ="danger" onClick={()=>this.deleteStudent(student)}>Delete</Button>}
-				
+				update={<Button variant ="primary" onClick={()=>this.updateStudent(student)}>Update</Button>}
 				/>
 
 		);
@@ -78,7 +92,7 @@ class ShowStudents extends Component{
 						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 					</Helmet>
-					<Container style={{backgroundColor: "black"}} fluid>
+					<Container style={{backgroundColor: "black", height: "2000px"}} fluid>
 					<Table striped bordered hover variant="dark" size="sm">
 						<thead>
 							<tr>
@@ -103,7 +117,21 @@ class ShowStudents extends Component{
 						{studentDiv}
 					</tbody>
 					</Table>
+					
+					<Modal.Dialog>
+						<Modal.Header closeButton>
+							<Modal.Title>Update Student</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							{this.state.updateForm?this.state.form:null}
+						</Modal.Body>
+						<Modal.Footer>
+							<Button variant="secondary">close</Button>
+						</Modal.Footer>
+					</Modal.Dialog>
+					
 					</Container>
+					
 				</div>
 		
 		);

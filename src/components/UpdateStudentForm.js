@@ -5,19 +5,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import {Helmet} from 'react-helmet';
 
 
-class StudentForm extends Component{
+class UpdateStudentForm extends Component{
 	constructor(props){
 		super(props)
 		this.state =
 		{
-			firstName: "",
-			lastName: "",
-			email: "",
-			contactNumber: "",
-			membershipExpiry: "",
-			hours: "",
-			studentImage: "",
-			imageUrl:""
+			firstName: this.props.student.firstname,
+			lastName: this.props.student.lastname,
+			email: this.props.student.email,
+			contactNumber: this.props.student.number,
+			membershipExpiry: this.props.student.memexpdate,
+			hours: this.props.student.hours,
+			studentImage: this.props.student.studentImage,
+			imageUrl:this.props.student.studentImage
 
 		}
 		this.setRef = ref => {
@@ -121,7 +121,7 @@ class StudentForm extends Component{
 			},
 			{	
 				name: "Contact Number",
-				id: "number",
+				id: "contact Number",
 				type: "text"
 			},
 			{
@@ -146,6 +146,10 @@ class StudentForm extends Component{
 				/>
 			</Form.Group>
 		)
+		const backgroundStyle={
+			height: "100px" ,
+			width: "80px"
+		}
 		return (
 			<div className="StudentForm">
 				<Helmet>
@@ -156,7 +160,7 @@ class StudentForm extends Component{
 						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 				</Helmet>	
-				<h1>Add Student</h1>
+				<h1>Update Student</h1>
 				<Form onSubmit={this.handleSubmit} style={styled}>
 					{
 						listItems
@@ -171,4 +175,4 @@ class StudentForm extends Component{
 
 }
 
-export default StudentForm;
+export default UpdateStudentForm;
