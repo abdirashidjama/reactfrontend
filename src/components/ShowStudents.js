@@ -1,13 +1,44 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import ShowStudent from './ShowStudent';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import {Helmet} from 'react-helmet';
+import Button from 'react-bootstrap/Button'
 
 class ShowStudents extends Component{
 	constructor(props){
 		super(props);
 		this.state={students:[]}
+		this.deleteStudent= this.deleteStudent.bind(this);
+	}
+	deleteStudent(student){
+		//Removes from database
+		var url = 'http://localhost:3001/students/'+ student._id;
+
+		fetch(url, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then(res => res.json())
+		.then(response=>console.log('Success:', JSON.stringify(response)))
+		.catch(error => console.error('Error:', error));
+		// Removes from state array
+		
+		//filter out deleted Student
+		const newStudents = this.state.students.filter(function(element){
+			return element.email != student.email
+		})
+
+		//set new state to new filtered array
+		this.setState({
+			students: newStudents
+		})
+
+
+		alert("user deleted");
+		return;
 	}
 	componentWillMount(){
 		fetch('http://localhost:3001/students/')
@@ -27,8 +58,13 @@ class ShowStudents extends Component{
 			}
 		}
 		
+		
 		const studentDiv = this.state.students.map(student =>
-				<ShowStudent student={student} />
+				<ShowStudent 
+				student={student} 
+				delete={<Button variant ="danger" onClick={()=>this.deleteStudent(student)}>Delete</Button>}
+				
+				/>
 
 		);
 
