@@ -10,6 +10,7 @@ class UpdateStudentForm extends Component{
 		super(props)
 		this.state =
 		{
+			_id: this.props.student._id,
 			firstName: this.props.student.firstname,
 			lastName: this.props.student.lastname,
 			email: this.props.student.email,
@@ -44,44 +45,23 @@ class UpdateStudentForm extends Component{
 		event.preventDefault();
 		
 
-		//get file
-		const file = this.file.files[0];
-		//create storage ref
-		const storageRef = firebase.storage().ref();
-		var metadata = {
-			contentType: 'image/jpeg'
-		};
-
-		var task = storageRef.child(this.file.files[0].name).put(file, metadata);
-
-		var urlImage = "";
-
-		task.on(firebase.storage.TaskEvent.STATE_CHANGED,
-			(snapshot)=>{
-
-			}, (error)=>{
-
-			}, ()=>{
-				task.snapshot.ref.getDownloadURL().then((urlDownload)=>{
-					this.setState({
-						imageUrl: urlDownload
-					}, 
-					
-					()=> {
-						console.log(this.state.imageUrl);
-						var url = 'http://localhost:3001/students/';
+		var url = 'http://localhost:3001/students/' +this.state._id;
 						const data = {
 							firstname : this.state.firstName,
 							lastname : this.state.lastName,
 							email: this.state.email,
 							number: this.state.number,
 							memexpdate: this.state.membershipExpiry,
-							hours: this.state.hours,
-							studentImage: this.state.imageUrl
+							hours: this.state.hours
+						}
+						var reqbody=[];
+						for(var key in data){
+							reqbody.push({"propName": key, "value": data[key]})
 						}
 						fetch(url, {
-							method: 'POST',
-							body: JSON.stringify(data),
+							method: 'PATCH',
+							body: JSON.stringify(reqbody),
+							Origin: "https://javascript.info",
 							headers: {
 								'Content-Type': 'application/json'
 							}
@@ -89,11 +69,6 @@ class UpdateStudentForm extends Component{
 						.then(res => res.json())
 						.then(response=>console.log('Success:', JSON.stringify(response)))
 						.catch(error => console.error('Error:', error));
-					}
-					);
-				});
-			}
-		);
 
 
 
