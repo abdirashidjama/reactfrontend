@@ -106,6 +106,12 @@ class ShowStudents extends Component{
 									Last Name
 								</th>
 								<th>
+									Hours
+								</th>
+								<th>
+									Contact Number
+								</th>
+								<th>
 									email
 								</th>
 								<th>

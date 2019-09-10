@@ -96,7 +96,7 @@ class UpdateStudentForm extends Component{
 			},
 			{	
 				name: "Contact Number",
-				id: "contact Number",
+				id: "number",
 				type: "text"
 			},
 			{
