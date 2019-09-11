@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import StudentForm from './components/StudentForm';
 import ShowStudents from './components/ShowStudents';
+import Attendance from './components/Attendance';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
@@ -25,6 +26,7 @@ const routing =(
 			<Route exact path="/" component={App}/>
 			<Route path="/newStudent" component={StudentForm} />
 			<Route path="/allStudents" component={ShowStudents}/>
+			<Route path="/attendance" component={Attendance}/>
 		</div>
 	</Router>
 	//</Provider>

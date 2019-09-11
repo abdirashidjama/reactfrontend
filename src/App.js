@@ -38,6 +38,18 @@ class App extends Component {
 						Coach Space
 					</h>
 					<input />
+
+					<Link to ="/attendance">
+						<Card bg="dark">
+							<Card.Img variant="top" style={cardStyle} src="https://images.unsplash.com/photo-1435527173128-983b87201f4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2094&q=80" />
+							<Card.Body>
+								<Card.Text>
+									Take Attendance
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					</Link>
+
 					<Link to ="/allStudents">
 						<Card bg="dark">
 							<Card.Img variant="top" style={cardStyle} src="https://images.unsplash.com/photo-1529566193698-bc394165d541?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1676&q=80" />
