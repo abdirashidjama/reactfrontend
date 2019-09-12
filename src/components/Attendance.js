@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
+import { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import {Helmet} from 'react-helmet';
+//import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
 
 class Attendance extends Component{
 	constructor(props){
@@ -14,7 +17,6 @@ class Attendance extends Component{
 	}
 
 	render(){
-		
 		return(
 			<Container>
 			<Helmet>
@@ -24,18 +26,17 @@ class Attendance extends Component{
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-				</Helmet>
-			<InputGroup className="mb-3">
-				<DropdownButton
-				as={InputGroup.Prepend} 
-				variant="outline-secondary"
-				title="Class"
-				id="input-group-dropdown-1"
-				>
-					<Dropdown.Item href="#">Gi</Dropdown.Item>
-				</DropdownButton>
-				<FormControl aria-describedby="basic-addon1" />
-			</InputGroup>
+			</Helmet>
+			<div class="input-group mb3">
+				<div class="input-group-prepend">
+					<button class="btn btn-outline secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">class</button>
+					<div class= "dropdown-menu">
+						<a class="dropdown-item" href="#">Gi</a>
+					</div>
+					<input type="text" class="form-control" aria-label="Text input with dropdown button"/>
+					<input type="date" class="form-control" aria-label="date input"/>
+				</div>
+			</div>
 			</Container>
 
 		);

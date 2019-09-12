@@ -14,7 +14,7 @@ class UpdateStudentForm extends Component{
 			firstName: this.props.student.firstname,
 			lastName: this.props.student.lastname,
 			email: this.props.student.email,
-			contactNumber: this.props.student.number,
+			number: this.props.student.number,
 			membershipExpiry: this.props.student.memexpdate,
 			hours: this.props.student.hours,
 			studentImage: this.props.student.studentImage,
