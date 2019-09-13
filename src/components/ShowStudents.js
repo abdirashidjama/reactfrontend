@@ -59,7 +59,6 @@ class ShowStudents extends Component{
 		.then(res=> res.json())
 		.then((data) => {
 			this.setState({students: data.students})
-			//dispatch(studentList(data.students))
 		})
 		.catch(console.log)
 	}

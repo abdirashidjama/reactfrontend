@@ -1,22 +1,58 @@
 import React, {Component} from 'react';
 import { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-import "react-datepicker/dist/react-datepicker.css";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import {Helmet} from 'react-helmet';
-//import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col'
+import Col from 'react-bootstrap/Col';
 
 class Attendance extends Component{
 	constructor(props){
 		super(props);
+
+		this.state={
+			students:[],
+			date:"",
+			filterData:[],
+			classes:{
+				"Gi" :[],
+				"NoGi":[],
+				"Striking":[]
+			},
+			value:""
+		};
+		this.suggestions = this.suggestions.bind(this);
+	}
+
+	componentWillMount(){
+		fetch('http://localhost:3001/students/')
+		.then(res=> res.json())
+		.then((data) => {
+			this.setState({students: data.students})
+		})
+		.catch(console.log)
+	}
+	suggestions(event){
+		//set state of value in name search bar first
+		const name = event.target.value
+		this.setState({
+			value: name,
+			filterData: this.state.students.filter(student => student.firstname.includes(name) ||student.lastname.includes(name))
+		});
 	}
 
 	render(){
+		var suggestion;
+		if(this.state.filterData.length != 0){
+			suggestion = this.state.filterData.map((student)=>
+				<a class="dropdown-item" href="#" id={student._id}>{student.firstname + " " + student.lastname}</a>
+			);
+		}
+
+		
 		return(
 			<Container>
 			<Helmet>
@@ -27,15 +63,21 @@ class Attendance extends Component{
 						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 			</Helmet>
+			<h1>Attendance</h1>
 			<div class="input-group mb3">
 				<div class="input-group-prepend">
 					<button class="btn btn-outline secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">class</button>
 					<div class= "dropdown-menu">
 						<a class="dropdown-item" href="#">Gi</a>
 					</div>
-					<input type="text" class="form-control" aria-label="Text input with dropdown button"/>
+					<input type="text" class="form-control" aria-label="Name input with dropdown button" value={this.state.value} onChange={this.suggestions}/>
+						<div class= "dropdown-menu">
+							<a class="dropdown-item" href="#">works</a>
+							{/*suggestion*/}
+						</div>
 					<input type="date" class="form-control" aria-label="date input"/>
 				</div>
+			{suggestion}
 			</div>
 			</Container>
 
