@@ -17,24 +17,44 @@ class Attendance extends Component{
 			students:[],
 			date:"",
 			filterData:[],
-			classes:{
-				"Gi" :[],
-				"NoGi":[],
-				"Striking":[]
-			},
-			value:"",
+			gi:[],
+			nogi:[],
+			Striking:[],
+			fullName:"",
+			class:"Gi",
 			student:{}
 		};
 		this.suggestions = this.suggestions.bind(this);
 		this.fillBar = this.fillBar.bind(this);
+		this.handleChange=this.handleChange.bind(this);
+		this.addStudent=this.addStudent.bind(this);
 	}
 
-	fillBar(student){
+	handleChange(event){
+		this.setState({value: event.target.value})
+	}
+
+	fillBar(studentP){
 
 		this.setState({
-			student: student,
-			value: this.state.student.firstname + " " + this.state.student.lastname
+			student: studentP,
+			fullName: this.state.student.firstname + " " + this.state.student.lastname,
+			filterData: []
 		});
+	}
+
+	addStudent(){
+		switch(this.state.class){
+			case ("Gi"):
+				var newList = [...this.state.gi, this.state.student]
+				this.setState({
+					gi: newList
+				});
+				break;
+			default:
+				break;
+		}
+		
 	}
 
 	componentWillMount(){
@@ -46,12 +66,12 @@ class Attendance extends Component{
 		.catch(console.log)
 	}
 	suggestions(event){
-		//set state of value in name search bar first
-		const name = event.target.value
+		//set state of fullName in name search bar first
+		const name = event.target.value;
 		const nameLowerCase = name.toLowerCase();
 		
 		this.setState({
-			value: name,
+			fullName: name,
 			filterData: this.state.students.filter(student => (student.firstname.toLowerCase()).includes(nameLowerCase) ||(student.lastname.toLowerCase()).includes(nameLowerCase))
 		});
 	}
@@ -63,8 +83,15 @@ class Attendance extends Component{
 				<li class="list-group-item" id={student._id} onClick={()=>this.fillBar(student)}>{student.firstname + " " + student.lastname}</li>
 			);
 		}
-
-		
+		var attendance=[];
+		var gia=[];
+		if (this.state.date !=""){
+			attendance.push(<h2>{this.state.date}</h2>);
+			if(this.state.gi.length !=0){
+				gia=this.state.gi.map((student)=><p>{student.firstname + student.lastname}</p>);
+				attendance.push(gia);
+			}
+		}
 		return(
 			<Container>
 			<Helmet>
@@ -78,22 +105,22 @@ class Attendance extends Component{
 			<h1>Attendance</h1>
 			<div class="input-group mb3">
 				<div class="input-group-prepend">
-					<button class="btn btn-outline secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">class</button>
-					<div class= "dropdown-menu">
-						<a class="dropdown-item" href="#">Gi</a>
-					</div>
-					<input type="text" class="form-control" aria-label="Name input with dropdown button" value={this.state.value} onChange={this.suggestions}/>
-					<input type="date" class="form-control" aria-label="date input"/>
-					<button type="button" class="btn btn-primary"> Add </button>
+					<select class= "form-control" id="classType" value={this.state.currentClass} onChange={this.handleChange}>
+						<option value="Gi">Gi</option>
+						<option value="Nogi">Nogi</option>
+						<option value="Striking">Striking</option>
+					</select>
+					<input type="text" class="form-control" aria-label="Name input with dropdown button" value={this.state.fullName} onChange={this.suggestions}/>
+					<input type="date" class="form-control" aria-label="date input" value={this.state.date} onChange={event => this.setState({date: event.target.value})}/>
+					<button type="button" class="btn btn-primary" onClick={this.addStudent}> Add </button>
 				</div>
 			</div>
 			<ul class="list-group">
 				{suggestion}
 			</ul>
+			{attendance}
 			</Container>
-
 		);
-
 	}
 }
 
