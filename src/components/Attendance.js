@@ -22,9 +22,19 @@ class Attendance extends Component{
 				"NoGi":[],
 				"Striking":[]
 			},
-			value:""
+			value:"",
+			student:{}
 		};
 		this.suggestions = this.suggestions.bind(this);
+		this.fillBar = this.fillBar.bind(this);
+	}
+
+	fillBar(student){
+
+		this.setState({
+			student: student,
+			value: this.state.student.firstname + " " + this.state.student.lastname
+		});
 	}
 
 	componentWillMount(){
@@ -38,9 +48,11 @@ class Attendance extends Component{
 	suggestions(event){
 		//set state of value in name search bar first
 		const name = event.target.value
+		const nameLowerCase = name.toLowerCase();
+		
 		this.setState({
 			value: name,
-			filterData: this.state.students.filter(student => student.firstname.includes(name) ||student.lastname.includes(name))
+			filterData: this.state.students.filter(student => (student.firstname.toLowerCase()).includes(nameLowerCase) ||(student.lastname.toLowerCase()).includes(nameLowerCase))
 		});
 	}
 
@@ -48,7 +60,7 @@ class Attendance extends Component{
 		var suggestion;
 		if(this.state.filterData.length != 0){
 			suggestion = this.state.filterData.map((student)=>
-				<a class="dropdown-item" href="#" id={student._id}>{student.firstname + " " + student.lastname}</a>
+				<li class="list-group-item" id={student._id} onClick={()=>this.fillBar(student)}>{student.firstname + " " + student.lastname}</li>
 			);
 		}
 
@@ -71,14 +83,13 @@ class Attendance extends Component{
 						<a class="dropdown-item" href="#">Gi</a>
 					</div>
 					<input type="text" class="form-control" aria-label="Name input with dropdown button" value={this.state.value} onChange={this.suggestions}/>
-						<div class= "dropdown-menu">
-							<a class="dropdown-item" href="#">works</a>
-							{/*suggestion*/}
-						</div>
 					<input type="date" class="form-control" aria-label="date input"/>
+					<button type="button" class="btn btn-primary"> Add </button>
 				</div>
-			{suggestion}
 			</div>
+			<ul class="list-group">
+				{suggestion}
+			</ul>
 			</Container>
 
 		);
