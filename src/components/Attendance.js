@@ -9,6 +9,7 @@ import {Helmet} from 'react-helmet';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+
 class Attendance extends Component{
 	constructor(props){
 		super(props);
@@ -19,9 +20,9 @@ class Attendance extends Component{
 			filterData:[],
 			gi:[],
 			nogi:[],
-			Striking:[],
+			striking:[],
 			fullName:"",
-			class:"Gi",
+			category:"Gi",
 			student:{}
 		};
 		this.suggestions = this.suggestions.bind(this);
@@ -44,11 +45,23 @@ class Attendance extends Component{
 	}
 
 	addStudent(){
-		switch(this.state.class){
+		switch(this.state.category){
 			case ("Gi"):
 				var newList = [...this.state.gi, this.state.student]
 				this.setState({
 					gi: newList
+				});
+				break;
+			case("Nogi"):
+				var newList = [...this.state.nogi, this.state.student]
+				this.setState({
+					nogi: newList
+				});
+				break;
+			case("Striking"):
+				var newList = [...this.state.striking, this.state.student]
+				this.setState({
+					striking: newList
 				});
 				break;
 			default:
@@ -76,7 +89,10 @@ class Attendance extends Component{
 		});
 	}
 
+
 	render(){
+		//creating select and options will move to another class later
+		
 		var suggestion;
 		if(this.state.filterData.length != 0){
 			suggestion = this.state.filterData.map((student)=>
@@ -84,14 +100,27 @@ class Attendance extends Component{
 			);
 		}
 		var attendance=[];
-		var gia=[];
+		var giList=[];
+		var nogiList=[];
+		var strikingList=[];
 		if (this.state.date !=""){
 			attendance.push(<h2>{this.state.date}</h2>);
 			if(this.state.gi.length !=0){
 				attendance.push(<h2>Gi Attendance</h2>)
-				gia=this.state.gi.map((student)=><p>{student.firstname + student.lastname}</p>);
-				attendance.push(gia);
+				giList=this.state.gi.map((student)=><p>{student.firstname + student.lastname}</p>);
+				attendance.push(giList);
 			}
+			if(this.state.nogi.length !=0){
+				attendance.push(<h2>NoGi Attendance</h2>)
+				nogiList=this.state.nogi.map((student)=><p>{student.firstname + student.lastname}</p>);
+				attendance.push(nogiList);
+			}
+			if(this.state.striking.length !=0){
+				attendance.push(<h2>Striking Attendance</h2>)
+				strikingList=this.state.striking.map((student)=><p>{student.firstname + student.lastname}</p>);
+				attendance.push(strikingList);
+			}
+	
 		}
 		return(
 			<Container>
@@ -106,7 +135,7 @@ class Attendance extends Component{
 			<h1>Attendance</h1>
 			<div class="input-group mb3">
 				<div class="input-group-prepend">
-					<select class= "form-control" id="classType" value={this.state.currentClass} onChange={this.handleChange}>
+					<select class= "form-control" id="classType" value={this.state.category} onChange={event => this.setState({category: event.target.value})}>
 						<option value="Gi">Gi</option>
 						<option value="Nogi">Nogi</option>
 						<option value="Striking">Striking</option>
