@@ -38,7 +38,7 @@ class Attendance extends Component{
 
 		this.setState({
 			student: studentP,
-			fullName: this.state.student.firstname + " " + this.state.student.lastname,
+			fullName: studentP.firstname + " " + studentP.lastname, //this.state.student.firstname + " " + this.state.student.lastname,
 			filterData: []
 		});
 	}
@@ -88,6 +88,7 @@ class Attendance extends Component{
 		if (this.state.date !=""){
 			attendance.push(<h2>{this.state.date}</h2>);
 			if(this.state.gi.length !=0){
+				attendance.push(<h2>Gi Attendance</h2>)
 				gia=this.state.gi.map((student)=><p>{student.firstname + student.lastname}</p>);
 				attendance.push(gia);
 			}
