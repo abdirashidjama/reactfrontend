@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
-import { useState } from 'react';
-import InputGroup from 'react-bootstrap/InputGroup';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import {Helmet} from 'react-helmet';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import StudentCard from './StudentCard';
 
 class Attendance extends Component{
 	constructor(props){
@@ -107,23 +100,25 @@ class Attendance extends Component{
 			attendance.push(<h2>{this.state.date}</h2>);
 			if(this.state.gi.length !=0){
 				attendance.push(<h2>Gi Attendance</h2>)
-				giList=this.state.gi.map((student)=><p>{student.firstname + student.lastname}</p>);
+				giList=this.state.gi.map((studentInfo)=><div class="col"><StudentCard student={studentInfo}/></div>);
+				giList=<div class="row">{giList}</div>
 				attendance.push(giList);
+	
 			}
 			if(this.state.nogi.length !=0){
 				attendance.push(<h2>NoGi Attendance</h2>)
-				nogiList=this.state.nogi.map((student)=><p>{student.firstname + student.lastname}</p>);
+				nogiList=this.state.nogi.map((studentInfo)=><StudentCard student={studentInfo}/>);
 				attendance.push(nogiList);
 			}
 			if(this.state.striking.length !=0){
 				attendance.push(<h2>Striking Attendance</h2>)
-				strikingList=this.state.striking.map((student)=><p>{student.firstname + student.lastname}</p>);
+				strikingList=this.state.striking.map((studentInfo)=><StudentCard student={studentInfo}/>);
 				attendance.push(strikingList);
 			}
 	
 		}
 		return(
-			<Container>
+			<div class="container">
 			<Helmet>
 						<meta charset="utf-8"/>
 						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
@@ -148,8 +143,11 @@ class Attendance extends Component{
 			<ul class="list-group">
 				{suggestion}
 			</ul>
-			{attendance}
-			</Container>
+				{attendance}
+
+
+
+			</div>
 		);
 	}
 }
