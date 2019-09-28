@@ -85,7 +85,10 @@ class Attendance extends Component{
 
 	render(){
 		//creating select and options will move to another class later
-		
+		const cStyle={
+			height: "50px" ,
+			width: "100px"
+		}
 		var suggestion;
 		if(this.state.filterData.length != 0){
 			suggestion = this.state.filterData.map((student)=>
@@ -100,7 +103,7 @@ class Attendance extends Component{
 			attendance.push(<h2>{this.state.date}</h2>);
 			if(this.state.gi.length !=0){
 				attendance.push(<h2>Gi Attendance</h2>)
-				giList=this.state.gi.map((studentInfo)=><div class="col"><StudentCard student={studentInfo}/></div>);
+				giList=this.state.gi.map((studentInfo)=><div class="row"><StudentCard style={cStyle} student={studentInfo}/></div>);
 				giList=<div class="row">{giList}</div>
 				attendance.push(giList);
 	
