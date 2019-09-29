@@ -85,10 +85,6 @@ class Attendance extends Component{
 
 	render(){
 		//creating select and options will move to another class later
-		const cStyle={
-			height: "50px" ,
-			width: "100px"
-		}
 		var suggestion;
 		if(this.state.filterData.length != 0){
 			suggestion = this.state.filterData.map((student)=>
@@ -103,19 +99,21 @@ class Attendance extends Component{
 			attendance.push(<h2>{this.state.date}</h2>);
 			if(this.state.gi.length !=0){
 				attendance.push(<h2>Gi Attendance</h2>)
-				giList=this.state.gi.map((studentInfo)=><div class="row"><StudentCard style={cStyle} student={studentInfo}/></div>);
+				giList=this.state.gi.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
 				giList=<div class="row">{giList}</div>
 				attendance.push(giList);
 	
 			}
 			if(this.state.nogi.length !=0){
 				attendance.push(<h2>NoGi Attendance</h2>)
-				nogiList=this.state.nogi.map((studentInfo)=><StudentCard student={studentInfo}/>);
+				nogiList=this.state.nogi.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
+				nogiList=<div class="row">{nogiList}</div>
 				attendance.push(nogiList);
 			}
 			if(this.state.striking.length !=0){
 				attendance.push(<h2>Striking Attendance</h2>)
-				strikingList=this.state.striking.map((studentInfo)=><StudentCard student={studentInfo}/>);
+				strikingList=this.state.striking.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
+				strikingList=<div class="row">{strikingList}</div>
 				attendance.push(strikingList);
 			}
 	

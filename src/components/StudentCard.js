@@ -7,12 +7,12 @@ class StudentCard extends Component{
 
 	render(){
 		const cStyle={
-			height: "100px" ,
-			width: "100px"
+			height: "15vw" ,
+			width: "100%"
 		}
 		return(
-			<div class="card">
-				<img class="img-thumbnail text-center" style={cStyle} src={this.props.student.studentImage}/>
+			<div class="card h-20">
+				<img class="card-img-top" style={cStyle} src={this.props.student.studentImage}/>
 				<div class="card-body">
 					<h5 class="card-title">{this.props.student.firstname + " " + this.props.student.lastname}</h5>
 				</div>
