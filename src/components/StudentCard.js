@@ -11,7 +11,7 @@ class StudentCard extends Component{
 			width: "100%"
 		}
 		return(
-			<div class="card h-20">
+			<div class="card h-5 w-5">
 				<img class="card-img-top" style={cStyle} src={this.props.student.studentImage}/>
 				<div class="card-body">
 					<h5 class="card-title">{this.props.student.firstname + " " + this.props.student.lastname}</h5>

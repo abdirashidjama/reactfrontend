@@ -22,6 +22,7 @@ class Attendance extends Component{
 		this.fillBar = this.fillBar.bind(this);
 		this.handleChange=this.handleChange.bind(this);
 		this.addStudent=this.addStudent.bind(this);
+		this.submit=this.submit.bind(this);
 	}
 
 	handleChange(event){
@@ -35,6 +36,26 @@ class Attendance extends Component{
 			fullName: studentP.firstname + " " + studentP.lastname, //this.state.student.firstname + " " + this.state.student.lastname,
 			filterData: []
 		});
+	}
+
+	submit(){
+		var student={};
+		for(student in this.state.gi){
+			var url = 'http://localhost:3001/students/' + student._id;
+			var reqbody = [{"propName": "hours", "value": (student.hours + 1)}]
+			fetch(url, {
+							method: 'PATCH',
+							body: JSON.stringify(reqbody),
+							Origin: "https://javascript.info",
+							headers: {
+								'Content-Type': 'application/json'
+							}
+						})
+						.then(res => res.json())
+						.then(response=>console.log('Success:', JSON.stringify(response)))
+						.catch(error => console.error('Error:', error));
+
+		}
 	}
 
 	addStudent(){
@@ -96,23 +117,23 @@ class Attendance extends Component{
 		var nogiList=[];
 		var strikingList=[];
 		if (this.state.date !=""){
-			attendance.push(<h2>{this.state.date}</h2>);
+			attendance.push(<h2>Attendance for date: {this.state.date}</h2>);
 			if(this.state.gi.length !=0){
 				attendance.push(<h2>Gi Attendance</h2>)
-				giList=this.state.gi.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
+				giList=this.state.gi.map((studentInfo)=><div class="col-lg-3 col-md-4 col-6"><StudentCard student={studentInfo}/></div>);
 				giList=<div class="row">{giList}</div>
 				attendance.push(giList);
 	
 			}
 			if(this.state.nogi.length !=0){
 				attendance.push(<h2>NoGi Attendance</h2>)
-				nogiList=this.state.nogi.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
+				nogiList=this.state.nogi.map((studentInfo)=><div class="col-lg-3 col-md-4 col-6"><StudentCard student={studentInfo}/></div>);
 				nogiList=<div class="row">{nogiList}</div>
 				attendance.push(nogiList);
 			}
 			if(this.state.striking.length !=0){
 				attendance.push(<h2>Striking Attendance</h2>)
-				strikingList=this.state.striking.map((studentInfo)=><div class="col-lg-3"><StudentCard student={studentInfo}/></div>);
+				strikingList=this.state.striking.map((studentInfo)=><div class="col-lg-3 col-md-4 col-6"><StudentCard student={studentInfo}/></div>);
 				strikingList=<div class="row">{strikingList}</div>
 				attendance.push(strikingList);
 			}
@@ -128,7 +149,7 @@ class Attendance extends Component{
 						<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 						<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 			</Helmet>
-			<h1>Attendance</h1>
+			<h1 class="my-4">Attendance</h1>
 			<div class="input-group mb3">
 				<div class="input-group-prepend">
 					<select class= "form-control" id="classType" value={this.state.category} onChange={event => this.setState({category: event.target.value})}>
@@ -145,6 +166,7 @@ class Attendance extends Component{
 				{suggestion}
 			</ul>
 				{attendance}
+			<button type="button" class="btn btn-primary" onClick={this.submit}>Submit</button>
 
 
 
