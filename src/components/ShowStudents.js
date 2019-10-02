@@ -105,7 +105,13 @@ class ShowStudents extends Component{
 									Last Name
 								</th>
 								<th>
-									Hours
+									Gi Hours
+								</th>
+								<th>
+									NoGi Hours
+								</th>
+								<th>
+									Striking Hours
 								</th>
 								<th>
 									Contact Number

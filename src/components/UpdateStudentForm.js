@@ -18,6 +18,9 @@ class UpdateStudentForm extends Component{
 			membershipExpiry: this.props.student.memexpdate,
 			hours: this.props.student.hours,
 			studentImage: this.props.student.studentImage,
+			giHours: this.state.giHours,
+			noGiHours: this.state.noGiHours,
+			strikingHours: this.state.strikingHours,
 			imageUrl:this.props.student.studentImage
 
 		}
@@ -52,7 +55,9 @@ class UpdateStudentForm extends Component{
 							email: this.state.email,
 							number: this.state.number,
 							memexpdate: this.state.membershipExpiry,
-							hours: this.state.hours
+							giHours: this.state.giHours,
+							noGiHours: this.state.noGiHours,
+							strikingHours: this.state.strikingHours
 						}
 						var reqbody=[];
 						for(var key in data){
@@ -105,8 +110,18 @@ class UpdateStudentForm extends Component{
 				type: "text"
 			},
 			{
-				name: "Total Hours",
-				id: "hours",
+				name: "Gi Hours",
+				id: "giHours",
+				type: "number"
+			},
+			{
+				name: "NoGi Hours",
+				id: "noGiHours",
+				type: "number"
+			},
+			{
+				name: "Striking Hours",
+				id: "strikingHours",
 				type: "number"
 			}
 		]

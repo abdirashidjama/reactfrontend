@@ -28,7 +28,9 @@ class ShowStudent extends Component{
 				<td style={imageStyle}><Image src={this.props.student.studentImage} fluid/></td>
 				<td>{this.props.student.firstname}</td>
 				<td>{this.props.student.lastname}</td>
-				<td>{this.props.student.hours}</td>
+				<td>{this.props.student.giHours}</td>
+				<td>{this.props.student.noGiHours}</td>
+				<td>{this.props.student.strikingHours}</td>
 				<td>{this.props.student.number}</td>
 				<td>{this.props.student.email}</td>
 				<td>
