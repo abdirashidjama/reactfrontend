@@ -39,10 +39,9 @@ class Attendance extends Component{
 	}
 
 	submit(){
-		var student={};
-		for(student in this.state.gi){
-			var url = 'http://localhost:3001/students/' + student._id;
-			var reqbody = [{"propName": "hours", "value": (student.hours + 1)}]
+		for(var i=0; i < this.state.gi.length;i++){
+			var url = 'http://localhost:3001/students/' + this.state.gi[i]._id;
+			var reqbody = [{"propName": "giHours", "value": (this.state.gi[i].giHours + 1)}]
 			fetch(url, {
 							method: 'PATCH',
 							body: JSON.stringify(reqbody),
@@ -54,7 +53,36 @@ class Attendance extends Component{
 						.then(res => res.json())
 						.then(response=>console.log('Success:', JSON.stringify(response)))
 						.catch(error => console.error('Error:', error));
-
+		}
+		for(var i=0; i < this.state.nogi.length;i++){
+			var url = 'http://localhost:3001/students/' + this.state.nogi[i]._id;
+			var reqbody = [{"propName": "noGiHours", "value": (this.state.nogi[i].noGiHours + 1)}]
+			fetch(url, {
+							method: 'PATCH',
+							body: JSON.stringify(reqbody),
+							Origin: "https://javascript.info",
+							headers: {
+								'Content-Type': 'application/json'
+							}
+						})
+						.then(res => res.json())
+						.then(response=>console.log('Success:', JSON.stringify(response)))
+						.catch(error => console.error('Error:', error));
+		}
+		for(var i=0; i < this.state.striking.length;i++){
+			var url = 'http://localhost:3001/students/' + this.state.striking[i]._id;
+			var reqbody = [{"propName": "strikingHours", "value": (this.state.striking[i].strikingHours + 1)}]
+			fetch(url, {
+							method: 'PATCH',
+							body: JSON.stringify(reqbody),
+							Origin: "https://javascript.info",
+							headers: {
+								'Content-Type': 'application/json'
+							}
+						})
+						.then(res => res.json())
+						.then(response=>console.log('Success:', JSON.stringify(response)))
+						.catch(error => console.error('Error:', error));
 		}
 	}
 
